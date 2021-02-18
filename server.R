@@ -258,22 +258,22 @@ server <- function(input, output, session) {
   
   
   # OBSERVER Calendario Date
-  observeEvent(input$daterange, {
-    
-    dateInizio(input$daterange[1])
-    
-    dateFine(input$daterange[2])
-    
-    # print(input$daterange[1])
-    # print(input$daterange[2])
-    
-  #  das<-getDate(as.Date(input$daterange[1]),as.Date(input$daterange[2]))
-    das<-images.lut$dates
-    shinyWidgets::updateSliderTextInput(session, 'dayselected', 
-                                      choices=das )
-  
-  #  shinyWidgets::updateSliderTextInput(session, 'dayselected', choices=as.Date(as.numeric(das), origin="1970-01-01"))
-  })
+  # observeEvent(input$daterange, {
+  #   
+  #   dateInizio(input$daterange[1])
+  #   
+  #   dateFine(input$daterange[2])
+  #   
+  #   # print(input$daterange[1])
+  #   # print(input$daterange[2])
+  #   
+  # #  das<-getDate(as.Date(input$daterange[1]),as.Date(input$daterange[2]))
+  #   das<-images.lut$dates
+  #   shinyWidgets::updateSliderTextInput(session, 'dayselected', 
+  #                                     choices=das )
+  # 
+  # #  shinyWidgets::updateSliderTextInput(session, 'dayselected', choices=as.Date(as.numeric(das), origin="1970-01-01"))
+  # })
   
   
   

@@ -14,7 +14,8 @@ images.lut<-NULL
 update.Images<-function(){
   imagelist<-list.files(path= image.folder, pattern="S2[AB]_MSIL2A.*T32TQS.*\\.SAFE", recursive = F, full.names = T )  
   dates<- as.POSIXlt( substr(imagelist, 29,43), format="%Y%m%dT%H%M%OS")
-  images.lut<<- data.frame(folder=imagelist, dates=((as.Date(dates))) )
+  images<- data.frame(folder=imagelist, dates=((as.Date(dates))) )
+  images.lut<<- images[ -anyDuplicated(images$dates) , ]
 }
 
 update.Images()

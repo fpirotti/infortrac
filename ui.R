@@ -13,7 +13,7 @@ ui <- fluidPage(
 
   # Show a plot of the generated distribution
   shiny::mainPanel(
-    leaflet::leafletOutput("mymap", width=1860, height=900)
+    leaflet::leafletOutput("mymap", width=1860, height=900 )
   ),
   
   #Pannello header con titolo
@@ -43,7 +43,7 @@ ui <- fluidPage(
                 bottom = "auto",
                 width = 80, 
                 height = 40, 
-                includeCSS("www/mycss.css"),  
+               # includeCSS("www/mycss.css"),  
                 
                 actionButton('showBtn1','',height = 50, icon = icon("gear")),
                 
@@ -80,23 +80,36 @@ ui <- fluidPage(
                                              choices = list("NDVI" = 1, "RGI" = 2, "NDMI" = 3, "NIR"=4, "RGB" = 5),
                                              selected = 1,inline = TRUE), 
                                 
+                                fluidRow(
+                                  column(6, materialSwitch(
+                                      inputId = "mskCld",
+                                      label = "Filtra Nuvole", 
+                                      status = "primary",
+                                      right = F
+                                    ) ), column(6,
+                                    materialSwitch(
+                                      inputId = "mskSnow",
+                                      label = "Filtra Neve", 
+                                      status = "primary",
+                                      right = TRUE
+                                    )
+                                    )),
+                                # shiny::br(),
+                                # shiny::p("Scegli le date:"),
+                                # 
+                                # shiny::dateRangeInput("daterange", "", language="it",
+                                #                start  = min(images.lut$dates),
+                                #                end    = NULL,
+                                #                min    = min(images.lut$dates),
+                                #                #format = "mm/dd/yy",
+                                #                separator = " - "),
                                 
-                                shiny::br(),
-                                shiny::p("Scegli le date:"),
-                                
-                                shiny::dateRangeInput("daterange", "", language="it",
-                                               start  = min(images.lut$dates),
-                                               end    = NULL,
-                                               min    = min(images.lut$dates),
-                                               #format = "mm/dd/yy",
-                                               separator = " - "),
-                                
-                                shiny::p("Giorno da visualizzare: "),
+                                shiny::p(sprintf("Giorno da visualizzare: %d", length(images.lut$dates) ) ),
                                 
                                 shinyWidgets::sliderTextInput("dayselected",
                                                 "",
-                                                choices=c("2018-08-27","2020-09-15"),
-                                                grid=TRUE,
+                                                choices=as.character(images.lut$dates),
+                                                grid=TRUE
                                                 #min = as.Date("2019-01-01"),
                                                 #max = as.Date("2019-01-01"),
                                                 #value = as.Date("2018-01-01"),
@@ -141,7 +154,7 @@ ui <- fluidPage(
                 bottom = "auto",
                 width = 80, 
                 height = 40, 
-                includeCSS("www/mycss.css"),  
+                #includeCSS("www/mycss.css"),  
                 
                 actionButton('showBtn2','',height = 50, icon = icon("chart-line")),
                 
@@ -154,7 +167,7 @@ ui <- fluidPage(
                                 left = 30,
                                 height = "355",
                                 width = "420",
-                                includeCSS("www/mycss.css"),
+                               # includeCSS("www/mycss.css"),
                                 
                                 shiny::div(style="display: inline-block;vertical-align:top;margin-top:4px;width: 80px;margin-left:-35px","Risultati"),
                                 
